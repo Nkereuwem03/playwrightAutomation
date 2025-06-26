@@ -46,7 +46,7 @@ test("should print all product details and read data from all paginated table pa
     let row = rows.nth(i);
     let tds = row.locator("td");
     for (let j = 0; j < (await tds.count()) - 1; j++) {
-      console.log(await tds.nth(j).textContent());
+      // console.log(await tds.nth(j).textContent());
     }
   }
 
@@ -61,7 +61,7 @@ test("should print all product details and read data from all paginated table pa
     let row = rows.nth(i);
     let tds = row.locator("td");
     for (let j = 0; j < (await tds.count()) - 1; j++) {
-      console.log(await tds.nth(j).textContent());
+      // console.log(await tds.nth(j).textContent());
     }
   }
 });
