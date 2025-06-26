@@ -41,5 +41,4 @@ test("should interact with a nested frame and click elements inside it", async (
   ).toHaveText(
     "Thank you for testing the UI.Vision RPA software! As this is just a test form, all submitted data is automatically deleted."
   );
-  await page.waitForTimeout(5000);
 });

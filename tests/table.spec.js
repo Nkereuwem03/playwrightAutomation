@@ -30,7 +30,7 @@ test("should validate product table structure and select products by name", asyn
   await selectProduct(rows, page, "Smartphone");
 });
 
-test.only("should print all product details and read data from all paginated table pages", async ({
+test("should print all product details and read data from all paginated table pages", async ({
   page,
 }) => {
   await page.goto("https://testautomationpractice.blogspot.com/");

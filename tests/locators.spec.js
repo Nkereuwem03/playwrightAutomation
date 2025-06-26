@@ -27,10 +27,7 @@ test("should register, login, and visit each product on Demoblaze using locators
   for (let i = 0; i < itemCount; i++) {
     const item = page.locator("a.hrefch").nth(i);
     const itemText = await item.textContent();
-    console.log(itemText);
     await item.click();
     await page.goBack();
   }
-
-  await page.close();
 });

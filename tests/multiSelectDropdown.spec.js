@@ -19,5 +19,4 @@ test("should select multiple colors and verify selected and total options in mul
   await expect(selectedOptions).toHaveCount(3);
   expect(await page.$$("#colors option:checked")).toHaveLength(3);
 
-  await page.waitForTimeout(6000);
 });

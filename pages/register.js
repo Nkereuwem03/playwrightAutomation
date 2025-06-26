@@ -21,29 +21,19 @@ export default class RegisterPage {
   }
 
   async register(
-    firstName,
-    lastName,
-    address,
-    city,
-    state,
-    zipCode,
-    phone,
-    ssn,
-    username,
-    password,
-    confirmPassword
+    userData
   ) {
-    await this.page.fill(this.firstName, firstName);
-    await this.page.fill(this.lastName, lastName);
-    await this.page.fill(this.address, address);
-    await this.page.fill(this.city, city);
-    await this.page.fill(this.state, state);
-    await this.page.fill(this.zipCode, zipCode);
-    await this.page.fill(this.phone, phone);
-    await this.page.fill(this.ssn, ssn);
-    await this.page.fill(this.username, username);
-    await this.page.fill(this.password, password);
-    await this.page.fill(this.confirmPassword, confirmPassword);
+    await this.page.fill(this.firstName, userData.firstName);
+    await this.page.fill(this.lastName, userData.lastName);
+    await this.page.fill(this.address, userData.address);
+    await this.page.fill(this.city, userData.city);
+    await this.page.fill(this.state, userData.state);
+    await this.page.fill(this.zipCode, userData.zipCode);
+    await this.page.fill(this.phone, userData.phone);
+    await this.page.fill(this.ssn, userData.ssn);
+    await this.page.fill(this.username, userData.username);
+    await this.page.fill(this.password, userData.password);
+    await this.page.fill(this.confirmPassword, userData.confirmPassword);
     await this.page.locator(this.submit).click()
   }
 }

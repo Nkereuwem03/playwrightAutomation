@@ -1,20 +1,16 @@
 import { test, expect } from "@playwright/test";
 
-test("should select a suggestion containing '56' from Wikipedia auto-suggest dropdown", async ({
+test("should select a suggestion from Wikipedia auto-suggest dropdown", async ({
   page,
 }) => {
   await page.goto("https://www.wikipedia.org/");
   await page.locator("#searchInput").fill("Playwright");
-  await page.waitForSelector(".suggestions-dropdown a>div>h3", {
-    state: "visible",
-  });
-  const options = await page.$$(".suggestions-dropdown a>div>h3");
-  for (const option of options) {
-    const text = await option.innerText();
-    if (text.includes("56")) {
-      await option.click();
-      break;
-    }
-  }
-  await page.waitForTimeout(8000);
+
+  const firstSuggestion = page.locator(".suggestions-dropdown a").first();
+  // Get the text of the suggestion we are about to click
+  const suggestionText = await firstSuggestion.locator("h3").innerText();
+  await firstSuggestion.click();
+
+  // Assert that the new page title contains the text of the clicked suggestion
+  await expect(page).toHaveTitle(new RegExp(suggestionText));
 });

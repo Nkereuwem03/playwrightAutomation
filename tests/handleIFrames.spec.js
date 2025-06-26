@@ -100,6 +100,6 @@ test("should validate form fields and error messages inside the Products iframe"
   await expect(frame.getByText("Date must not be empty.")).not.toBeVisible();
   await expect(frame.getByTestId("all-fields-validation")).not.toBeVisible();
   await frame.getByTestId("submit-form").click();
-
-  await page.waitForTimeout(3000);
+  
+  // await expect(frame.getByRole('heading', { name: 'Products' })).toBeVisible();
 });

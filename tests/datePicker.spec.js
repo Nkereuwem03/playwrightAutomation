@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
 
 dayjs.extend(customParseFormat);
 
@@ -8,7 +8,8 @@ test("should fill the date picker input with a specific date", async ({
   page,
 }) => {
   await page.goto("https://testautomationpractice.blogspot.com/");
-  await page.fill("#datepicker", "2023-10-01");
+  await page.locator("#datepicker").fill("10/01/2023");
+  await expect(page.locator("#datepicker")).toHaveValue("10/01/2023");
 });
 
 test("should select a specific date using the date picker UI and validate input value", async ({
@@ -19,60 +20,30 @@ test("should select a specific date using the date picker UI and validate input 
   const yearInput = "2026";
   const monthInput = "June";
   const dayInput = "10";
+  const targetDate = dayjs(`${yearInput}-${monthInput}-${dayInput}`, "YYYY-MMMM-D");
 
   await page.locator("#datepicker").click();
   while (true) {
-    const currentMonth = await page
-      .locator(".ui-datepicker-month")
-      .textContent();
+    const currentMonth = await page.locator(".ui-datepicker-month").textContent();
     const currentYear = await page.locator(".ui-datepicker-year").textContent();
-    if (currentMonth === monthInput && currentYear === yearInput) {
+    const currentDate = dayjs(`${currentYear}-${currentMonth}`, "YYYY-MMMM");
+
+    if (currentDate.isSame(targetDate, 'month')) {
       break;
     }
-    const currentMonthAndYear = dayjs(
-      `${currentMonth} ${currentYear}`,
-      "MMMM YYYY"
-    );
-    const monthAndYearInput = dayjs(`${monthInput} ${yearInput}`, "MMMM YYYY");
-    if (monthAndYearInput.isBefore(currentMonthAndYear)) {
-      await page.locator("a[title='Prev']").click();
+
+    if (targetDate.isBefore(currentDate)) {
+      await page.getByRole('link', { name: 'Prev' }).click();
     } else {
       await page.locator("a[title='Next']").click();
+      // await page.getByRole('link', { name: 'Next' }).click();
     }
   }
 
-  const dayLocator = await page.$$(".ui-state-default");
-  for (const locator of dayLocator) {
-    const text = await locator.textContent();
-    if (text === dayInput) {
-      await locator.click();
-      break;
-    }
-  }
+  await page.getByRole('link', { name: dayInput, exact: true }).click();
 
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const monthIndex = "0" + (months.indexOf(monthInput) + 1);
-
-  await page.locator("#datepicker").blur();
-  
-  await expect(page.locator("#datepicker")).toHaveValue(
-    `${monthIndex}/${dayInput}/${yearInput}`
-  );
-
-  await page.waitForTimeout(6000);
+  const expectedDateValue = targetDate.format("MM/DD/YYYY");
+  await expect(page.locator("#datepicker")).toHaveValue(expectedDateValue);
 });
 
 test("should select the 25th day from the date picker calendar", async ({
@@ -81,5 +52,5 @@ test("should select the 25th day from the date picker calendar", async ({
   await page.goto("https://testautomationpractice.blogspot.com/");
   await page.locator("#datepicker").click();
   const day = "25";
-  await page.locator(`//a[@class='ui-state-default'][text()=${day}]`).click();
+  await page.getByRole('link', { name: day, exact: true }).click();
 });

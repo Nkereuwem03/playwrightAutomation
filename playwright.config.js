@@ -5,9 +5,18 @@ import { defineConfig, devices } from "@playwright/test";
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
-// import path from 'path';
+import dotenv from 'dotenv';
+import path from 'path';
+
+// commonJs
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+// esModule
+import { fileURLToPath } from "url";
+// In ES modules, __dirname is not available. This is a workaround.
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -15,14 +24,14 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests",
   /* Run tests in files in parallel */
-  fullyParallel: false,
+  fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  // retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 0,
   // retries: 3,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  /* Opt out of parallel tests on CI. We can increase this later for faster runs. */
+  workers: process.env.CI ? 2 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   // reporter: 'html',
   reporter: [
@@ -57,8 +66,6 @@ export default defineConfig({
     video: "retain-on-failure",
     screenshot: "only-on-failure",
   },
-
-  timeout: 1000000,
 
   /* Configure projects for major browsers */
   projects: [

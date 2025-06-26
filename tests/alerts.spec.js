@@ -12,7 +12,6 @@ test("should handle alert dialog and accept it", async ({ page }) => {
   });
 
   await page.click("#alertBtn");
-  //   await page.waitForTimeout(6000);
 });
 
 // Confirm dialog test
@@ -29,7 +28,6 @@ test("should handle confirm dialog and dismiss it", async ({ page }) => {
 
   await page.click("#confirmBtn");
   await expect(page.locator("#demo")).toHaveText("You pressed Cancel!");
-  //   await page.waitForTimeout(6000);
 });
 
 test("should handle prompt dialog, provide input, and accept it", async ({
@@ -50,5 +48,4 @@ test("should handle prompt dialog, provide input, and accept it", async ({
   await expect(page.locator("#demo")).toHaveText(
     "Hello John Doe! How are you today?"
   );
-  //   await page.waitForTimeout(6000);
 });

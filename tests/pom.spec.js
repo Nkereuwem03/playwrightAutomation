@@ -12,26 +12,23 @@ test.beforeEach(async ({ page }) => {
 test("should register a user", async ({ page }) => {
   const registerPage = new RegisterPage(page);
   await registerPage.goTo();
-  await registerPage.register(
-    "John",
-    "Doe",
-    "John Doe Street",
-    "Utica",
-    "New York",
-    "43097",
-    "321-543-76",
-    "4324670",
-    USERNAME,
-    PASSWORD,
-    PASSWORD
-  );
+  const userData = {
+    firstName: "John",
+    lastName: "Doe",
+    address: "John Doe Street",
+    city: "Utica",
+    state: "New York",
+    zipCode: "43097",
+    phone: "321-543-76",
+    ssn: "4324670",
+    username: USERNAME,
+    password: PASSWORD,
+    confirmPassword: PASSWORD,
+  };
+  await registerPage.register(userData);
 });
 
 test("should login a user", async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.login(USERNAME, PASSWORD);
-});
-
-test.afterEach(async ({ page }) => {
-  await page.waitForTimeout(10000);
 });

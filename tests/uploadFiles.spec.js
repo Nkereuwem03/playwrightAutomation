@@ -10,7 +10,6 @@ test("should upload a single PDF file and submit the form", async ({
     .locator("#singleFileInput")
     .setInputFiles("tests/uploadFiles/file-example_PDF_1MB.pdf");
   await page.locator("form[id='singleFileForm'] button[type='submit']").click();
-  await page.waitForTimeout(5000);
 });
 
 test("should upload multiple PDF files and submit the form", async ({
@@ -27,7 +26,6 @@ test("should upload multiple PDF files and submit the form", async ({
   await page
     .locator("form[id='multipleFilesForm'] button[type='submit']")
     .click();
-  await page.waitForTimeout(5000);
 });
 
 test("should upload and then clear multiple files in the file input", async ({
@@ -42,6 +40,4 @@ test("should upload and then clear multiple files in the file input", async ({
       "tests/uploadFiles/file-example_PDF_500_kB.pdf",
     ]);
   await page.locator("#multipleFilesInput").setInputFiles([]);
-
-  await page.waitForTimeout(5000);
 });

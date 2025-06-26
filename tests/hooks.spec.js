@@ -1,7 +1,12 @@
 import { test, expect } from "@playwright/test";
 import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
 
+const TEST_USERNAME = process.env.TEST_USERNAME || "John Doe";
+const TEST_PASSWORD = process.env.TEST_PASSWORD || "ThisIsNotAPassword";
+const KATALON_DEMO_BASE_URL =
+  process.env.KATALON_DEMO_BASE_URL ||
+  "https://katalon-demo-cura.herokuapp.com";
 dayjs.extend(customParseFormat);
 
 test.beforeEach(async ({ page }) => {
@@ -15,7 +20,7 @@ test.beforeEach(async ({ page }) => {
 test.afterEach(async ({ page }) => {
   await page.locator("#menu-toggle").click();
   await page.locator("//a[normalize-space()='Logout']").click();
-  await page.waitForTimeout(6000);
+  await expect(page.locator("#btn-make-appointment")).toBeVisible();
 });
 
 test("should list and select options from facility dropdown", async ({

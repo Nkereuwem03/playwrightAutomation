@@ -15,15 +15,15 @@ test("should validate all input fields, checkboxes, radio buttons, and form subm
   const nameInput = page.locator("#name-input");
   await expect(nameInput).toBeEmpty();
   await expect(nameInput).toBeEditable();
-  await nameInput.fill("John Doe");
-  await expect(nameInput).toHaveValue("John Doe");
+  await nameInput.fill(process.env.TEST_USERNAME);
+  await expect(nameInput).toHaveValue(process.env.TEST_USERNAME);
 
   // password
   const passwordInput = page.locator("input[type='password']");
   await expect(passwordInput).toBeEmpty();
   await expect(passwordInput).toBeEditable();
-  await passwordInput.fill("John Doe");
-  await expect(passwordInput).toHaveValue("John Doe");
+  await passwordInput.fill(process.env.TEST_PASSWORD);
+  await expect(passwordInput).toHaveValue(process.env.TEST_PASSWORD);
 
   await expect(page.getByText("What is your favorite drink?")).toBeVisible();
 
@@ -50,8 +50,8 @@ test("should validate all input fields, checkboxes, radio buttons, and form subm
   const emailInput = page.locator("#email");
   await expect(emailInput).toBeEditable();
   await emailInput.clear();
-  await emailInput.fill("john_doe@example.com");
-  await expect(emailInput).toHaveValue("john_doe@example.com");
+  await emailInput.fill(process.env.TEST_EMAIL);
+  await expect(emailInput).toHaveValue(process.env.TEST_EMAIL);
   await expect(emailInput).toHaveAttribute("id", "email");
 
   // textarea

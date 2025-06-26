@@ -7,5 +7,5 @@ test("should open context menu on right-click using jQuery-contextMenu demo", as
   await page
     .locator(".context-menu-one.btn.btn-neutral")
     .click({ button: "right" });
-  await page.waitForTimeout(6000);
+  await expect(page.locator(".context-menu-list")).toBeVisible();
 });
