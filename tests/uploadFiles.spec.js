@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 test("should upload a single PDF file and submit the form", async ({
   page,
 }) => {
-  await page.goto("https://testautomationpractice.blogspot.com");
+  await page.goto("https://testautomationpractice.blogspot.com/");
 
   // upload file using file relative path
   const filePath = path.join(
@@ -24,7 +24,7 @@ test("should upload a single PDF file and submit the form", async ({
 test("should upload multiple PDF files and submit the form", async ({
   page,
 }) => {
-  await page.goto("https://testautomationpractice.blogspot.com");
+  await page.goto("https://testautomationpractice.blogspot.com/");
   const filePaths = [
     path.join(__dirname, "uploadFiles", "dummy.pdf"),
     path.join(__dirname, "uploadFiles", "file-example_PDF_500_kB.pdf"),
@@ -39,7 +39,7 @@ test("should upload multiple PDF files and submit the form", async ({
 test("should upload and then clear multiple files in the file input", async ({
   page,
 }) => {
-  await page.goto("https://testautomationpractice.blogspot.com");
+  await page.goto("https://testautomationpractice.blogspot.com/");
   const filePaths = [
     path.join(__dirname, "uploadFiles", "dummy.pdf"),
     path.join(__dirname, "uploadFiles", "file-example_PDF_500_kB.pdf"),
