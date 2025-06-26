@@ -8,7 +8,7 @@ test("should upload a single PDF file and submit the form", async ({
   // upload file using file relative path
   await page
     .locator("#singleFileInput")
-    .setInputFiles("tests/uploadFiles/file-example_PDF_1MB.pdf");
+    .setInputFiles("./tests/uploadFiles/file-example_PDF_1MB.pdf");
   await page.locator("form[id='singleFileForm'] button[type='submit']").click();
 });
 
@@ -19,9 +19,9 @@ test("should upload multiple PDF files and submit the form", async ({
   await page
     .locator("#multipleFilesInput")
     .setInputFiles([
-      "tests/uploadFiles/dummy.pdf",
-      "tests/uploadFiles/file-example_PDF_500_kB.pdf",
-      "tests/uploadFiles/file-example_PDF_500_kB.pdf",
+      "./tests/uploadFiles/dummy.pdf",
+      "./tests/uploadFiles/file-example_PDF_500_kB.pdf",
+      "./tests/uploadFiles/file-example_PDF_500_kB.pdf",
     ]);
   await page
     .locator("form[id='multipleFilesForm'] button[type='submit']")
@@ -35,9 +35,9 @@ test("should upload and then clear multiple files in the file input", async ({
   await page
     .locator("#multipleFilesInput")
     .setInputFiles([
-      "tests/uploadFiles/dummy.pdf",
-      "tests/uploadFiles/file-example_PDF_500_kB.pdf",
-      "tests/uploadFiles/file-example_PDF_500_kB.pdf",
+      "./tests/uploadFiles/dummy.pdf",
+      "./tests/uploadFiles/file-example_PDF_500_kB.pdf",
+      "./tests/uploadFiles/file-example_PDF_500_kB.pdf",
     ]);
   await page.locator("#multipleFilesInput").setInputFiles([]);
 });
