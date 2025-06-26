@@ -1,4 +1,5 @@
 import { test, expect } from "playwright/test";
+import path from "node:path";
 
 test("should upload a single PDF file and submit the form", async ({
   page,
@@ -6,9 +7,12 @@ test("should upload a single PDF file and submit the form", async ({
   await page.goto("https://testautomationpractice.blogspot.com/");
 
   // upload file using file relative path
-  await page
-    .locator("#singleFileInput")
-    .setInputFiles("./tests/uploadFiles/file-example_PDF_1MB.pdf");
+  const filePath = path.join(
+    __dirname,
+    "uploadFiles",
+    "file-example_PDF_1MB.pdf"
+  );
+  await page.locator("#singleFileInput").setInputFiles(filePath);
   await page.locator("form[id='singleFileForm'] button[type='submit']").click();
 });
 
@@ -16,13 +20,12 @@ test("should upload multiple PDF files and submit the form", async ({
   page,
 }) => {
   await page.goto("https://testautomationpractice.blogspot.com/");
-  await page
-    .locator("#multipleFilesInput")
-    .setInputFiles([
-      "./tests/uploadFiles/dummy.pdf",
-      "./tests/uploadFiles/file-example_PDF_500_kB.pdf",
-      "./tests/uploadFiles/file-example_PDF_500_kB.pdf",
-    ]);
+  const filePaths = [
+    path.join(__dirname, "uploadFiles", "dummy.pdf"),
+    path.join(__dirname, "uploadFiles", "file-example_PDF_500_kB.pdf"),
+    path.join(__dirname, "uploadFiles", "file-example_PDF_500_kB.pdf"),
+  ];
+  await page.locator("#multipleFilesInput").setInputFiles(filePaths);
   await page
     .locator("form[id='multipleFilesForm'] button[type='submit']")
     .click();
@@ -32,12 +35,11 @@ test("should upload and then clear multiple files in the file input", async ({
   page,
 }) => {
   await page.goto("https://testautomationpractice.blogspot.com/");
-  await page
-    .locator("#multipleFilesInput")
-    .setInputFiles([
-      "./tests/uploadFiles/dummy.pdf",
-      "./tests/uploadFiles/file-example_PDF_500_kB.pdf",
-      "./tests/uploadFiles/file-example_PDF_500_kB.pdf",
-    ]);
+  const filePaths = [
+    path.join(__dirname, "uploadFiles", "dummy.pdf"),
+    path.join(__dirname, "uploadFiles", "file-example_PDF_500_kB.pdf"),
+    path.join(__dirname, "uploadFiles", "file-example_PDF_500_kB.pdf"),
+  ];
+  await page.locator("#multipleFilesInput").setInputFiles(filePaths);
   await page.locator("#multipleFilesInput").setInputFiles([]);
 });
