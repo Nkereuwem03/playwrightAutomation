@@ -1,5 +1,9 @@
 # Playwright Automation Project
 
+[![Tests](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Nkereuwem03/playwrightAutomation/main/test-results/badge-summary.json)](https://github.com/Nkereuwem03/playwrightAutomation/actions)
+
+---
+
 This repository contains end-to-end and UI automation tests using [Playwright](https://playwright.dev/) for various demo web applications. The project demonstrates best practices for browser automation, including handling forms, dropdowns, alerts, frames, file uploads, screenshots, and more.
 
 ---

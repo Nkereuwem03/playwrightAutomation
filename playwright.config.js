@@ -46,13 +46,13 @@ export default defineConfig({
     [
       "junit",
       {
-        outputFile: "test-results.xml",
+        outputFile: "test-results/test-results.xml",
       },
     ],
     [
       "json",
       {
-        outputFile: "test-results.json",
+        outputFile: "test-results/test-results.json",
       },
     ],
   ],

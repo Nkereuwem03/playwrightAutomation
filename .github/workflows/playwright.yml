@@ -30,12 +30,20 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test
+        # Use `npm test` to also trigger the `posttest` script for badge generation
+        run: npm test
         env:
           REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
           TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+
+      - name: Commit test results badge
+        if: github.event_name == 'push'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: Update test results badge"
+          file_pattern: "test-results/badge-summary.json"
 
       - name: Generate Allure Report
         if: always()
