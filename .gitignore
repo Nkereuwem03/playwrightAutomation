@@ -2,10 +2,7 @@
 node_modules/
 
 # Playwright test results and reports
-test-results.json
-test-results.zip
 test-results/
-test-results.xml
 playwright-report/
 
 # VS Code settings
