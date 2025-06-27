@@ -40,19 +40,19 @@ export default defineConfig({
     [
       "allure-playwright",
       {
-        outputFolder: "allure-results",
+        outputFolder: "test-results/allure-results",
       },
     ],
     [
       "junit",
       {
-        outputFile: "test-results/test-results.xml",
+        outputFile: "test-results/results.xml",
       },
     ],
     [
       "json",
       {
-        outputFile: "test-results/test-results.json",
+        outputFile: "test-results/results.json",
       },
     ],
   ],
